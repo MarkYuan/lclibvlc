@@ -53,3 +53,5 @@ build*
 contrib-*
 install-*
 
+.mailmap
+AUTHORS
