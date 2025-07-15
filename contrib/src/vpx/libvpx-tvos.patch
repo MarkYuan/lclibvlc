@@ -1,0 +1,21 @@
+diff -ru libvpx/build/make/configure.sh libvpx/build/make/configure.sh
+--- libvpx/build/make/configure.sh	2020-09-19 13:43:58.000000000 +0200
++++ libvpx/build/make/configure.sh	2020-09-19 13:43:26.000000000 +0200
+@@ -996,7 +996,7 @@
+ 
+         darwin*)
+           if ! enabled external_build; then
+-            XCRUN_FIND="xcrun --sdk iphoneos --find"
++            XCRUN_FIND="xcrun --sdk appletvos --find"
+             CXX="$(${XCRUN_FIND} clang++)"
+             CC="$(${XCRUN_FIND} clang)"
+             AR="$(${XCRUN_FIND} ar)"
+@@ -1015,7 +1015,7 @@
+             add_cflags -arch ${tgt_isa}
+             add_ldflags -arch ${tgt_isa}
+ 
+-            alt_libc="$(show_darwin_sdk_path iphoneos)"
++            alt_libc="$(show_darwin_sdk_path appletvos)"
+             if [ -d "${alt_libc}" ]; then
+               add_cflags -isysroot ${alt_libc}
+             fi

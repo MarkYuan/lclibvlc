@@ -1,0 +1,44 @@
+
+ 3.6.1b1
+ 8e65224
+3.6.1b1: - update to libvlc 3.0.22-pre
+@fkuehne fkuehne tagged this Jun 23, 2024
+- fix crashes in AV1 decoding on AArch64
+- fix playback of multi-channel audio using the OPUS decoder
+
+基于版本v3.6.1b1改进
+git clone https://github.com/MarkYuan/fastplayervlckit.git Fastplayer-vlckit
+cd repo-name
+git fetch --all --tags
+git tag  # 查看所有可用的 tag
+git checkout tags/3.6.1b1 -b fp-361b   #切换到自定义分支
+
+Ffmpeg n4.4.4 （和v3.6.0使用相同版本ffmpeg)
+git clone --depth 1 --branch n4.4.4 https://github.com/FFmpeg/FFmpeg.git FFmpeg4_4_4"
+
+#FFMPEG 4.4.4 修复 （该修复需要更新相同版本ffmpge后，修改后生成patch文件）
+"Fix crashes in ff_seek_frame_binary if built with latest Clang 14
+https://lists.ffmpeg.org/pipermail/ffmpeg-cvslog/2024-April/142577.html
+https://lists.ffmpeg.org/pipermail/ffmpeg-devel/2021-November/287574.html"	
+modules/demux/adaptive/http/ConnectionParams.cpp 
+	
+git, patch 教程	
+https://cloud.tencent.com/developer/article/1423939	
+
+
+# LIB VLC修改点如下： (libvlc手动修改后关闭github网络更新，NONETWORK=yes)
+"m3u8, ipv6 无法播放的问题
+https://code.videolan.org/videolan/vlc/-/issues/27623
+https://code.videolan.org/videolan/vlc/-/merge_requests/2949/diffs?commit_id=6d7d4a2db0fefc3536f91b6bfcaf5f4e787d6487"	
+
+# LIB VLC
+INPUT_RECORD_PREFIX
+vlc 截图功能文件名处理 - [vlcsnap开头] -> snapshot
+    libvlc/vlc/src/libvlc-module.c
+    libvlc/vlc/src/video_output/snapshot.c
+vlc 录屏功能文件名处理 - [vlc-record开头] -> record
+    libvlc/vlc/include/vlc_input.h
+
+
+#编译framework, 避免重复编译libvlc
+./buildMobileVLCKit.sh -l -a aarch64
